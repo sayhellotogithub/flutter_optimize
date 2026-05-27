@@ -6,6 +6,7 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_optimize/utils/trace_config.dart';
 
 class PerformanceTracker {
   static final PerformanceTracker _instance = PerformanceTracker._internal();
@@ -21,7 +22,7 @@ class PerformanceTracker {
     Future<T> Function() action,
   ) async {
     //In a non-debugging environment, you can choose to execute directly to reduce overhead.
-    if (kReleaseMode) {
+    if (!TraceConfig.isEnabled) {
       return await action();
     }
 
